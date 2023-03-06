@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "third_party_tokens",
+  "info": {
+    "singularName": "third-party-token",
+    "pluralName": "third-party-tokens",
+    "displayName": "Third Party Tokens"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "provider": {
+      "type": "string",
+      "required": true
+    },
+    "token": {
+      "type": "string",
+      "required": true
+    },
+    "token_type": {
+      "type": "string",
+      "required": true
+    },
+    "refresh_token": {
+      "type": "string",
+      "required": true
+    },
+    "is_active": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prompt_builders",
+  "info": {
+    "singularName": "prompt-builder",
+    "pluralName": "prompt-builders",
+    "displayName": "PromptBuilder",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "prompt": {
+      "type": "text"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "public": {
+      "type": "boolean",
+      "default": true
+    },
+    "allWebsite": {
+      "type": "boolean",
+      "default": true
+    },
+    "promptType": {
+      "type": "enumeration",
+      "enum": [
+        "Include",
+        "Suggested"
+      ]
+    },
+    "featured_sites": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::domain-manager.domain-manager",
+      "mappedBy": "prompts"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "prompts"
+    },
+    "gem": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::gem.gem",
+      "inversedBy": "prompt"
+    },
+    "prompt_response": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::prompt-response.prompt-response",
+      "inversedBy": "prompt_builders"
+    }
+  }
+}

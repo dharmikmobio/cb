@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tags",
+  "info": {
+    "singularName": "tag",
+    "pluralName": "tags",
+    "displayName": "Tags",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "gem_tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::gem-tag.gem-tag",
+      "mappedBy": "tag"
+    },
+    "tag": {
+      "type": "string"
+    },
+    "collections": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::collection.collection",
+      "mappedBy": "tags"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "tags"
+    },
+    "gem": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::gem.gem",
+      "inversedBy": "tags"
+    },
+    "feedback": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::feedback.feedback",
+      "inversedBy": "tags"
+    }
+  }
+}

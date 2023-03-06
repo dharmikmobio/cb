@@ -1,0 +1,128 @@
+{
+  "kind": "collectionType",
+  "collectionName": "collections",
+  "info": {
+    "singularName": "collection",
+    "pluralName": "collections",
+    "displayName": "Collections",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "fields": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "color": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "sharable_links": {
+      "type": "string"
+    },
+    "invited_users": {
+      "type": "string"
+    },
+    "public_url_detail": {
+      "type": "string"
+    },
+    "total_downvotes": {
+      "type": "integer"
+    },
+    "total_upvotes": {
+      "type": "integer"
+    },
+    "comments": {
+      "type": "string"
+    },
+    "public_link": {
+      "type": "string"
+    },
+    "account": {
+      "type": "string"
+    },
+    "custom_fields": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::custom-field.custom-field",
+      "mappedBy": "collection"
+    },
+    "gems": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::gem.gem",
+      "mappedBy": "collection_gems"
+    },
+    "follower": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::follower.follower",
+      "inversedBy": "collections"
+    },
+    "account_2": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::account.account",
+      "inversedBy": "collections"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "collections"
+    },
+    "is_sub_collection": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "collection": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::collection.collection",
+      "inversedBy": "parent_collection"
+    },
+    "parent_collection": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::collection.collection",
+      "mappedBy": "collection"
+    },
+    "rating": {
+      "type": "integer",
+      "default": 5,
+      "max": 5,
+      "min": 1
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "collections"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::categorie.categorie",
+      "inversedBy": "collections"
+    }
+  }
+}

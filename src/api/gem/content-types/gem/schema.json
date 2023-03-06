@@ -1,0 +1,156 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gems",
+  "info": {
+    "singularName": "gem",
+    "pluralName": "gems",
+    "displayName": "Gems",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "metaData": {
+      "type": "json"
+    },
+    "upvotes": {
+      "type": "integer",
+      "default": 0
+    },
+    "downvotes": {
+      "type": "integer"
+    },
+    "is_favourite": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "gem_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::gem-categorie.gem-categorie",
+      "inversedBy": "Gems"
+    },
+    "collection_gems": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::collection.collection",
+      "inversedBy": "gems"
+    },
+    "media": {
+      "type": "json"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "gems"
+    },
+    "gem_tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::gem-tag.gem-tag",
+      "mappedBy": "gems"
+    },
+    "media_type": {
+      "type": "enumeration",
+      "enum": [
+        "Ai Prompts",
+        "Apps",
+        "Article",
+        "Audio",
+        "Books",
+        "Code",
+        "Email Newsletter",
+        "Epub",
+        "Highlight Text",
+        "Image",
+        "Link",
+        "Movies",
+        "Notes",
+        "PDF",
+        "Products",
+        "Quote",
+        "RSS",
+        "Screenshot",
+        "Text",
+        "Twitter",
+        "Video"
+      ]
+    },
+    "url": {
+      "type": "text"
+    },
+    "text": {
+      "type": "text"
+    },
+    "domain_manager": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::domain-manager.domain-manager",
+      "inversedBy": "gems"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag",
+      "mappedBy": "gem"
+    },
+    "remarks": {
+      "type": "text"
+    },
+    "Comments": {
+      "type": "integer"
+    },
+    "Shares": {
+      "type": "integer"
+    },
+    "Views": {
+      "type": "integer"
+    },
+    "AverageRating": {
+      "type": "float"
+    },
+    "S3_link": {
+      "type": "json"
+    },
+    "FileName": {
+      "type": "string"
+    },
+    "imageColor": {
+      "type": "json"
+    },
+    "prompt": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::prompt-builder.prompt-builder",
+      "mappedBy": "gem"
+    },
+    "prompt_response": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::prompt-response.prompt-response",
+      "mappedBy": "gem"
+    },
+    "activity_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity-log.activity-log",
+      "mappedBy": "gem"
+    },
+    "moviesObj": {
+      "type": "json"
+    },
+    "ratings": {
+      "type": "decimal"
+    }
+  }
+}

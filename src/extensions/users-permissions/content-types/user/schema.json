@@ -1,0 +1,141 @@
+{
+  "kind": "collectionType",
+  "collectionName": "up_users",
+  "info": {
+    "name": "user",
+    "description": "",
+    "singularName": "user",
+    "pluralName": "users",
+    "displayName": "User"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "timestamps": true
+  },
+  "attributes": {
+    "username": {
+      "type": "string",
+      "minLength": 3,
+      "unique": true,
+      "configurable": false,
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "minLength": 6,
+      "configurable": false,
+      "required": true
+    },
+    "provider": {
+      "type": "string",
+      "configurable": false
+    },
+    "password": {
+      "type": "password",
+      "minLength": 6,
+      "configurable": false,
+      "private": true
+    },
+    "resetPasswordToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true
+    },
+    "confirmationToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true
+    },
+    "confirmed": {
+      "type": "boolean",
+      "default": false,
+      "configurable": false
+    },
+    "blocked": {
+      "type": "boolean",
+      "default": false,
+      "configurable": false
+    },
+    "role": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.role",
+      "inversedBy": "users",
+      "configurable": false
+    },
+    "user_accounts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-account.user-account",
+      "mappedBy": "user_user_account"
+    },
+    "user_badges": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-badge.user-badge",
+      "mappedBy": "user_user_badges"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "collections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::collection.collection",
+      "mappedBy": "author"
+    },
+    "gems": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::gem.gem",
+      "mappedBy": "author"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "users"
+    },
+    "preferences": {
+      "type": "json"
+    },
+    "prompts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::prompt-builder.prompt-builder",
+      "mappedBy": "user"
+    },
+    "prompt_response": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::prompt-response.prompt-response",
+      "mappedBy": "user"
+    },
+    "activity_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity-log.activity-log",
+      "mappedBy": "action_owner"
+    },
+    "unfiltered_collection": {
+      "type": "biginteger",
+      "unique": false,
+      "required": false
+    },
+    "feedbacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::feedback.feedback",
+      "mappedBy": "users_permissions_user"
+    },
+    "text_to_speeches": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::text-to-speech.text-to-speech",
+      "mappedBy": "author"
+    }
+  }
+}

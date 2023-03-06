@@ -1,0 +1,52 @@
+name: Node.js CI
+on:
+  push:
+    branches: [ development, staging ]
+
+jobs:
+  deployment-on-aws:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Configure AWS credentials
+        if: github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/development'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: AWS Staging Deployment
+        if: github.ref == 'refs/heads/staging'
+        id: deploy
+        run: |
+          aws deploy create-deployment \
+            --application-name curateit-backend \
+            --deployment-group-name curateit-backend-deployment \
+            --deployment-config-name CodeDeployDefault.OneAtATime \
+            --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+
+      - name: AWS Development Deployment
+        if: github.ref == 'refs/heads/development'
+        id: development-deploy
+        run: |
+          aws deploy create-deployment \
+            --application-name curateit-dev-backend \
+            --deployment-group-name curateit-dev-backend-grp \
+            --deployment-config-name CodeDeployDefault.OneAtATime \
+            --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+
+

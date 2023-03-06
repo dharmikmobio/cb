@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_extras_categories",
+  "info": {
+    "displayName": "Category",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "category_bool": {
+      "type": "boolean",
+      "default": false
+    },
+    "category": {
+      "type": "json"
+    },
+    "isPublished": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
